@@ -35,7 +35,7 @@ public class StringTest {
 //        if(isBlank(reg)){
 //
 //        }
-        return new ArrayList<>(Arrays.asList(param.split(reg)));
+        return new ArrayList<String>(Arrays.asList(param.split(reg)));
     }
 
 
