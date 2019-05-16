@@ -3,6 +3,8 @@ package cn.huanghong.testSE.test13JSON;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import java.util.Map;
+
 /**
  * @program: demo
  * @description: ${description}
@@ -24,12 +26,14 @@ public class Test01 {
                 "\t\t\t}\n" +
                 "\t\t}\n" +
                 "\t}";
-        JSONObject data = JSON.parseObject(str);
-        System.out.println(data.toJSONString());
-        JSONObject itemdata = data.getJSONObject("items");
-        System.out.println(itemdata.toJSONString());
-        String l = itemdata.toJSONString();
-        String vt = l.substring(l.indexOf("time")-2,l.length()-1);
-        System.out.println(vt);
+//        JSONObject data = JSON.parseObject(str);
+//        System.out.println(data.toJSONString());
+//        JSONObject itemdata = data.getJSONObject("items");
+//        System.out.println(itemdata.toJSONString());
+//        String l = itemdata.toJSONString();
+//        String vt = l.substring(l.indexOf("time")-2,l.length()-1);
+//        System.out.println(vt);
+        Map map = (Map)JSON.parse(str);
+        System.out.println(map);
     }
 }
