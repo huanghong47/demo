@@ -8,7 +8,11 @@ package cn.huanghong.testSE.test02Str;
  */
 public class Test01 {
     public static void main(String[] args) {
-        String str = String.format("%05d", 44);
-        System.out.println(str);
+//        String str = String.format("%05d", 44);
+//        System.out.println(str);
+        String str = "avbf";
+//        System.out.println(str.indexOf("a"));
+        String str2 = "AVBF";
+        System.out.println(str2.equalsIgnoreCase(str));
     }
 }
