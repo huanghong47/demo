@@ -18,6 +18,7 @@ public class MyThread extends Thread{
         try {
             System.out.println(Thread.currentThread().getName()+"--MyThread---start---sleep");
             Thread.sleep(10000);
+            test();
             System.out.println(Thread.currentThread().getName()+"----MyThread----end---sleep");
         } catch (InterruptedException e) {
             e.printStackTrace();
