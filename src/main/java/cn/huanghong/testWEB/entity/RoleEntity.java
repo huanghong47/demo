@@ -3,30 +3,30 @@ package cn.huanghong.testWEB.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 /**
  * @program: demo
  * @description: ${description}
  * @author: huanghong
- * @date: 2019-02-13 17:13
+ * @date: 2019-06-27 10:28
  */
 @Data
 @NoArgsConstructor
-public class UserEntity {
+public class RoleEntity {
 
     private Integer id;
 
     private String name;
 
-    List<RoleEntity>roles;
+    private Integer userid;
 
-    public UserEntity(Integer id, String name) {
+    public RoleEntity(Integer id, String name, Integer userid) {
         this.id = id;
         this.name = name;
+        this.userid = userid;
     }
 
-    public UserEntity(String name) {
+    public RoleEntity(String name, Integer userid) {
         this.name = name;
+        this.userid = userid;
     }
 }

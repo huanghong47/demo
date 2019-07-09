@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.huanghong.testWEB.dao.BanjiDao">
+    <sql id="allcolumn">
+        uuid,name
+    </sql>
+
+    <sql id="allcolumn2">
+        #{uuid},#{name}
+    </sql>
+
+    <select id="getlist" resultType="cn.huanghong.testWEB.entity.BanjiEntity">
+        select <include refid="allcolumn"></include>
+        from t_banji
+    </select>
+
+    <select id="getone" resultType="cn.huanghong.testWEB.entity.BanjiEntity" parameterType="String">
+        select <include refid="allcolumn"></include>
+        from t_banji where uuid= #{0}
+    </select>
+
+    <insert id="insertbatch" parameterType="list">
+        insert into t_banji
+        (uuid,name)
+        values
+        <foreach collection="list" separator="," item="i">
+            (#{i.uuid},#{i.name})
+        </foreach>
+    </insert>
+
+</mapper>

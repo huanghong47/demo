@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.huanghong.testWEB.dao.RoleDao">
+    <sql id="allcolumn">
+        id,name,userid
+    </sql>
+
+    <sql id="allcolumn2">
+        #{id},#{name},#{userid}
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="cn.huanghong.testWEB.entity.RoleEntity">
+        insert into t_role
+        (<include refid="allcolumn"></include>)
+        values
+        (<include refid="allcolumn2"></include>)
+    </insert>
+
+    <select id="selectByEntity" resultType="cn.huanghong.testWEB.entity.RoleEntity" parameterType="map">
+        select <include refid="allcolumn"></include>
+        from t_role
+    </select>
+
+    <insert id="insertbatch" parameterType="list">
+        insert into t_role
+        (name,userid)
+        values
+        <foreach collection="list" separator="," item="i">
+            (#{i.name},#{i.userid})
+        </foreach>
+    </insert>
+
+    <select id="getlistByuserid" resultType="cn.huanghong.testWEB.entity.RoleEntity" parameterType="Integer">
+        select * from t_role where userid = #{0}
+    </select>
+</mapper>

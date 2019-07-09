@@ -5,6 +5,8 @@ import cn.huanghong.testWEB.service.IUserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @program: demo
  * @description: ${description}
@@ -16,7 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService implements IUserService {
 
     @Override
-    public void insert(UserEntity param) {
+    public String insert(UserEntity param) {
+        return null;
+    }
 
+    @Override
+    public List<UserEntity> getlist() {
+        return null;
     }
 }

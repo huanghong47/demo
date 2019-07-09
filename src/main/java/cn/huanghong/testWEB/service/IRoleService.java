@@ -1,5 +1,6 @@
 package cn.huanghong.testWEB.service;
 
+import cn.huanghong.testWEB.entity.RoleEntity;
 import cn.huanghong.testWEB.entity.UserEntity;
 
 import java.util.List;
@@ -8,10 +9,9 @@ import java.util.List;
  * @program: demo
  * @description: ${description}
  * @author: huanghong
- * @date: 2019-02-13 17:14
+ * @date: 2019-06-27 10:30
  */
-public interface IUserService {
-    String insert(UserEntity param);
-
-    List<UserEntity>getlist();
+public interface IRoleService {
+    String insert(RoleEntity param);
+    List<RoleEntity>getlist();
 }

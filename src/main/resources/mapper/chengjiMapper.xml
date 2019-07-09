@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.huanghong.testWEB.dao.ChengjiDao">
+    <sql id="allcolumn">
+        uuid,kemu,fenshu,xueshenguuid
+    </sql>
+
+    <sql id="allcolumn2">
+        #{uuid},#{kemu},#{fenshu},#{xueshenguuid}
+    </sql>
+
+    <select id="getlist" resultType="cn.huanghong.testWEB.entity.ChengjiEntity">
+        select <include refid="allcolumn"></include>
+        from t_chengji
+    </select>
+
+    <select id="getone" resultType="cn.huanghong.testWEB.entity.ChengjiEntity" parameterType="String">
+        select <include refid="allcolumn"></include>
+        from t_chengji where uuid= #{0}
+    </select>
+
+    <insert id="insertbatch" parameterType="list">
+        insert into t_chengji
+        (uuid,kemu,fenshu,xueshenguuid)
+        values
+        <foreach collection="list" separator="," item="i">
+            (#{i.uuid},#{i.kemu},#{i.fenshu},#{i.xueshenguuid})
+        </foreach>
+    </insert>
+
+    <select id="getByxueshenguuid" resultType="cn.huanghong.testWEB.entity.ChengjiEntity" parameterType="String">
+        select <include refid="allcolumn"></include>
+        from t_chengji where xueshenguuid = #{0}
+    </select>
+</mapper>

@@ -10,52 +10,37 @@
         #{id},#{name}
     </sql>
 
-    <insert id="insertOrUpdateByEntity" useGeneratedKeys="true" keyProperty="id" parameterType="cn.hhfarcry.springbootmybatis.example.entity.UserEntity">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="cn.huanghong.testWEB.entity.UserEntity">
         insert into t_user
-        (uuid
-        ,is_deleted
-        ,status
-        ,comment
-        ,create_user_uuid
-        ,create_time
-        ,user_name
-        ,password)
+       (<include refid="allcolumn"></include>)
         values
-        (#{uuid}
-        ,#{isDeleted}
-        ,#{status}
-        ,#{comment}
-        ,#{createUserUuid}
-        ,#{createTime}
-        ,#{userName}
-        ,#{password})
-        on duplicate key update
-        update_user_uuid = #{updateUserUuid}
-        ,update_time = current_timestamp
+        (<include refid="allcolumn2"></include>)
     </insert>
 
-    <select id="selectByEntity" resultType="cn.hhfarcry.springbootmybatis.example.entity.UserEntity" parameterType="map">
-        select id,<include refid="allcolumn"></include>
+    <resultMap id="userResultMap" type="cn.huanghong.testWEB.entity.UserEntity">
+        <id property="id" column="id"  />
+        <result property="name" column="name"  />
+        <collection property="roles" column="id" select="cn.huanghong.testWEB.dao.RoleDao.getlistByuserid">
+        </collection>
+    </resultMap>
+
+    <select id="getlist" resultMap="userResultMap">
+        select *
         from t_user
-        <where>
-                and is_deleted = 0
-            <if test=" uuid != null and uuid != '' ">
-                and uuid = #{uuid}
-            </if>
-            <if test=" status != null and status != '' ">
-                and status = #{status}
-            </if>
-            <if test=" userName != null and userName != '' ">
-                and user_name = #{userName}
-            </if>
-            <!--<if test=" name != null and name != '' ">-->
-                <!--and name  like CONCAT('%' , #{name} , '%')-->
-            <!--</if>-->
-        </where>
     </select>
 
-    <select id="">
-
-
+    <select id="getuser" resultMap="userResultMap">
+        select *
+        from t_user
+        where id = #{id}
     </select>
+
+    <insert id="insertbatch" parameterType="list">
+        insert into t_user
+        (name)
+        values
+        <foreach collection="list" separator="," item="i">
+            (#{i.name})
+        </foreach>
+    </insert>
 </mapper>

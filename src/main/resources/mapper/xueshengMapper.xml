@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.huanghong.testWEB.dao.XueshengDao">
+    <sql id="allcolumn">
+        uuid,name,banjiuuid
+    </sql>
+
+    <sql id="allcolumn2">
+        #{uuid},#{name},#{banjiuuid}
+    </sql>
+
+    <resultMap id="banjiresultMap" type="cn.huanghong.testWEB.entity.BanjiEntity">
+        <id property="uuid" column="banjiuuid"  />
+        <result property="name" column="banjiname"  />
+    </resultMap>
+
+    <resultMap id="xsresultmap1" type="cn.huanghong.testWEB.entity.XueshengEntity">
+        <id property="uuid" column="uuid"  />
+        <result property="name" column="name"  />
+        <result property="banjiuuid" column="banjiuuid"  />
+        <!--<association property="bj" resultMap="banjiresultMap"></association>-->
+        <collection property="cjs" column="uuid" select="cn.huanghong.testWEB.dao.ChengjiDao.getByxueshenguuid">
+
+        </collection>
+    </resultMap>
+
+    <resultMap id="xsresultmap2" type="cn.huanghong.testWEB.entity.XueshengEntity">
+        <id property="uuid" column="uuid"  />
+        <result property="name" column="name"  />
+        <result property="banjiuuid" column="banjiuuid"  />
+        <association property="bj" column="banjiuuid" select="cn.huanghong.testWEB.dao.BanjiDao.getone"></association>
+        <!--<collection property="cjs" column="uuid" select="cn.huanghong.testWEB.dao.ChengjiDao.getByxueshenguuid">-->
+
+        <!--</collection>-->
+    </resultMap>
+
+    <select id="getlist" resultMap="xsresultmap1" parameterType="map">
+        select xs.*,bj.name as banjiname
+        from t_xuesheng xs left join t_banji bj on xs.banjiuuid = bj.uuid
+    </select>
+
+    <select id="getone" resultType="cn.huanghong.testWEB.entity.XueshengEntity" parameterType="String">
+        select <include refid="allcolumn"></include>
+        from t_xuesheng where uuid= #{0}
+    </select>
+
+    <insert id="insertbatch" parameterType="list">
+        insert into t_xuesheng
+        (uuid,name,banjiuuid)
+        values
+        <foreach collection="list" separator="," item="i">
+            (#{i.uuid},#{i.name},#{i.banjiuuid})
+        </foreach>
+    </insert>
+</mapper>
