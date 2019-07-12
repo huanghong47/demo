@@ -71,9 +71,9 @@ public class Test01 {
         int k = 1000000000;
         int j = 1000000000;
 
-        Integer k1 = 1000000000;
-        Integer k2 = 1000000000;
-        System.out.println(j==k2);//自动拆箱
+        Integer k1 = 10;
+        Integer k2 = 10;
+        System.out.println(k1==k2);//自动拆箱
 
     }
 }
