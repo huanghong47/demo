@@ -8,8 +8,8 @@ package cn.huanghong.testSE.test02Str;
  */
 public class Test06 {
     public static void main(String[] args) {
-        String str1 = "06:00";
-        String str2 = "07:00";
+        String str1 = "2019-08";
+        String str2 = "2019-08";
         System.out.println(str1.compareTo(str2));
     }
 }

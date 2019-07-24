@@ -39,12 +39,14 @@ public class Test01 {
     }
 
     public static void main(String[] args) {
-
+        int i = 2;
         try {
-            System.out.println(main1());
+            i = 3;
+            int a = i/0;
+            System.out.println(a);
         } catch (Exception e) {
 //            System.out.println(e.getMessage());
-            e.printStackTrace();
+            System.out.println(i);
         }
     }
 }

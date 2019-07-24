@@ -11,9 +11,9 @@ import java.util.Arrays;
  * @author: huanghong
  * @date: 2019-01-11 08:53
  */
-public class Base64Test {
+public class  Base64Test {
 
-    public static void main(String[] args) {
+    public  static void main(String[] args) {
 
         String baseStr = "编码测试";
         byte[] baseByte = baseStr.getBytes(StandardCharsets.UTF_8);
