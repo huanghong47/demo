@@ -20,7 +20,8 @@ public class Test01 {
 //    }
 
     public static void main(String[] args) {
-        String str = "aaastr straaa";
-
+        String str = "2019-08";
+        String str2 = "2019-09";
+        System.out.println(str2.compareTo(str));
     }
 }
