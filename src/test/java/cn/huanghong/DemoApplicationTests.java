@@ -5,14 +5,13 @@ import cn.huanghong.testWEB.entity.*;
 import cn.huanghong.testWEB.utils.UUIDUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.sound.midi.Soundbank;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -128,5 +127,36 @@ public class DemoApplicationTests {
          List<XueshengEntity>xss = xueshengDao.getlist(param);
          System.out.println("11111111111111");
      }
+
+
+     @Autowired
+     private AliMessageDao aliMessageDao;
+
+     @Test
+     public void test07(){
+         List<AliMessageEntity>alis = new ArrayList<>();
+         String messageid = UUIDUtils.newUUID();
+         for(int i=0;i<10;i++){
+             AliMessageEntity aliMessageEntity = new AliMessageEntity();
+             aliMessageEntity.setUuid(UUIDUtils.newUUID());
+             aliMessageEntity.setComment("测试超大数据");
+             aliMessageEntity.setCreatetime(new Date());
+             aliMessageEntity.setCreateuseruuid("-1");
+             aliMessageEntity.setCreateusername("system");
+             aliMessageEntity.setUpdatetime(new Date());
+             aliMessageEntity.setUpdateuseruuid("-1");
+             aliMessageEntity.setUpdateusername("system");
+             aliMessageEntity.setGeneratetime(System.currentTimeMillis());
+             aliMessageEntity.setMessageid(messageid);
+             aliMessageEntity.setMsgsource(1);
+             aliMessageEntity.setPayload("实时数据"+i);
+             aliMessageEntity.setTopic("demo");
+             aliMessageEntity.setIsdeleted(1);
+             alis.add(aliMessageEntity);
+         }
+         aliMessageDao.insertByEntityBatch(alis);
+     }
+
+
 }
 

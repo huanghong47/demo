@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.huanghong.testWEB.dao.AliMessageDao">
+    <sql id="allcolumn">
+         uuid
+        ,isdeleted
+        ,comment
+        ,createuseruuid
+        ,createusername
+        ,createtime
+        ,updateuseruuid
+        ,updateusername
+        ,updatetime
+        ,messageid
+        ,topic
+        ,qos
+        ,generatetime
+        ,payload
+        ,msgsource
+    </sql>
+
+    <sql id="allcolumn2">
+        #{uuid}
+        ,#{isdeleted}
+        ,#{comment}
+        ,#{createuseruuid}
+        ,#{createusername}
+        ,#{createtime}
+        ,#{updateuseruuid}
+        ,#{updateusername}
+        ,#{updatetime}
+        ,#{messageid}
+        ,#{topic}
+        ,#{qos}
+        ,#{generatetime}
+        ,#{payload}
+        ,#{msgsource}
+    </sql>
+
+    <insert id="insertByEntity"  parameterType="cn.huanghong.testWEB.entity.AliMessageEntity">
+        insert into t_alimessage
+        (<include refid="allcolumn"></include>)
+        values
+        (<include refid="allcolumn2"></include>)
+    </insert>
+
+    <insert id="insertByEntityBatch" parameterType="list">
+        insert into t_alimessage
+        (<include refid="allcolumn"></include>)
+        values
+        <foreach collection="list" item="i" separator=",">
+            (#{i.uuid}
+            ,#{i.isdeleted}
+            ,#{i.comment}
+            ,#{i.createuseruuid}
+            ,#{i.createusername}
+            ,#{i.createtime}
+            ,#{i.updateuseruuid}
+            ,#{i.updateusername}
+            ,#{i.updatetime}
+            ,#{i.messageid}
+            ,#{i.topic}
+            ,#{i.qos}
+            ,#{i.generatetime}
+            ,#{i.payload}
+            ,#{i.msgsource})
+        </foreach>
+    </insert>
+
+    <select id="selectByEntity" resultType="cn.huanghong.testWEB.entity.AliMessageEntity" parameterType="map">
+        select *
+        from t_alimessage
+    </select>
+</mapper>
